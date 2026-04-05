@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTrendz - Premium E-Commerce Store</title>
+    <meta name="description" content="Shop premium electronics, fashion & more at TechTrendz. Best prices, fast delivery, secure checkout.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading TechTrendz...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-bolt"></i>
+                    <span>TechTrendz</span>
+                </div>
+                
+                <div class="nav-search">
+                    <input type="text" id="search-input" placeholder="Search products...">
+                    <button id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <div class="nav-actions">
+                    <div class="nav-icons">
+                        <button id="wishlist-btn" class="nav-icon-btn">
+                            <i class="far fa-heart"></i>
+                            <span class="badge hidden" id="wishlist-count">0</span>
+                        </button>
+                        <button id="cart-btn" class="nav-icon-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge" id="cart-count">0</span>
+                        </button>
+                    </div>
+                    <div class="nav-user">
+                        <button id="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <div class="hero-content">
+                    <h1>Premium Quality, Unbeatable Prices</h1>
+                    <p>Up to 50% OFF on Electronics, Fashion & Home Essentials</p>
+                    <button class="hero-btn">Shop Now</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=600&fit=crop" alt="Electronics Sale">
+            </div>
+            <div class="slide">
+                <div class="hero-content">
+                    <h1>Latest Fashion Collection</h1>
+                    <p>Trendy clothes starting at ₹299</p>
+                    <button class="hero-btn">Explore Fashion</button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&h=600&fit=crop" alt="Fashion">
+            </div>
+        </div>
+        <div class="hero-nav">
+            <span class="hero-dot active" data-slide="0"></span>
+            <span class="hero-dot" data-slide="1"></span>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="electronics">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Electronics</h3>
+                </div>
+                <div class="category-card" data-category="fashion">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Fashion</h3>
+                </div>
+                <div class="category-card" data-category="shoes">
+                    <i class="fas fa-shoe-prints"></i>
+                    <h3>Shoes</h3>
+                </div>
+                <div class="category-card" data-category="home">
+                    <i class="fas fa-home"></i>
+                    <h3>Home & Living</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="section-filters">
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                    </select>
+                    <select id="sort-filter">
+                        <option value="name">Sort by Name</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Best Rated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="products-grid" id="products-grid">
+                <!-- Products loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="product-detail">
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="modal-main-img" src="" alt="">
+                    </div>
+                    <div class="image-thumbs" id="image-thumbs">
+                        <!-- Thumbnails loaded dynamically -->
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 id="modal-title"></h2>
+                    <div class="product-price" id="modal-price"></div>
+                    <div class="product-rating" id="modal-rating"></div>
+                    <p id="modal-description"></p>
+                    <div class="quantity-selector">
+                        <label>Quantity:</label>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" id="qty-minus">-</button>
+                            <input type="number" id="modal-qty" value="1" min="1">
+                            <button class="qty-btn" id="qty-plus">+</button>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-primary add-to-cart-btn" id="modal-add-cart">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn-secondary add-to-wishlist-btn" id="modal-add-wishlist">
+                            <i class="far fa-heart"></i> Add to Wishlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal hidden">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart"></i> Shopping Cart</h2>
+                <button class="cart-close">&times;</button>
+            </div>
+            <div class="cart-body" id="cart-body">
+                <!-- Cart items loaded dynamically -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total: ₹<span id="cart-total">0</span></span>
+                </div>
+                <button class="btn-primary checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechTrendz</h3>
+                    <p>Premium quality products at unbeatable prices. Fast delivery across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Accepted Payments</h4>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fab fa-cc-amex"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechTrendz. All rights reserved. | Made with ❤️ for modern shopping</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
