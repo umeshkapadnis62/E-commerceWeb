@@ -45,8 +45,3 @@ This project is designed to:
 This is a **frontend-only project** (no backend or payment integration included).
 
 ---
-
-## 👨‍💻 Author
-
-**Umesh Sahebrao Kapadnis**
-Aspiring Java Full Stack Developer 🚀
